@@ -1,0 +1,31 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile 'com.android.tools.build:gradle:3.3.2'
+    compile 'org.aspectj:aspectjtools:1.8.8'
+    compile 'org.aspectj:aspectjrt:1.9.1'
+}
+
+repositories {
+    jcenter()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('D:\\HuPlugin\\Maven\\')){
+                //自定义maven仓库最后的artifactId，也就是版本号前面的那部分名字。不定义的话，默认会采用module名
+            }
+            pom.project {
+                version '1.0.0'//SNAPSHOT
+                artifactId 'aspectjplugin'//模块名
+                groupId 'com.hu.aspectjplugin'//包名
+                packaging 'jar'
+                description 'Aspectj Plugin'//描述
+            }
+        }
+    }
+}
